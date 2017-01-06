@@ -1,1 +1,3 @@
-PyMarkovChain
+markovify==0.5.4
+pkg-resources==0.0.0
+Unidecode==0.4.19
