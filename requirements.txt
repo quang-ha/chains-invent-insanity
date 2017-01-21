@@ -3,3 +3,4 @@ Unidecode==0.4.19
 requests==2.12.4
 flask
 flask-wtf
+python-dotenv
