@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chains Invent Insanity</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+          crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div id="content"></div>
+        {% block content %}
+        <div class="jumbotron">
+            <div class="h1">Welcome to Chains Invent Insanity</div><br />
+            <p class="text-left">
+                Chains Invent Insanity is a Cards Against Humanity answer card generator.<br />
+                As the name suggests, it generates cards based on a Markov chain compiled from a wordlist.<br />
+                This wordlist is comprised of every single answer card ever written for every edition of
+                <a href="https://cardsagainsthumanity.com" target="_blank">Cards Against Humanity.</a>
+            </p>
+        </div>
+        <div class="well well-lg">
+            {% for card in request.form['num_cards'] %}
+                {{ invent(attempts, num_cards) }}
+            {% endfor %}
+        </div>
+        {% endblock %}
+    </div>
+</body>
+</html>
