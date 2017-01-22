@@ -4,7 +4,6 @@ from dotenv import load_dotenv, find_dotenv
 import os
 import markovify
 import requests
-#from libs import invent
 
 # Tell our app where to get its environment variables from
 dotenv_path = join(dirname(__file__), '.env')
@@ -21,6 +20,8 @@ app.secret_key = os.environ.get('APP_KEY')
 def invent(attempts, num_cards):
 
     use_local = os.environ.get('USE_LOCAL_WORDLIST')
+    attempts_str2int = int(attempts)
+    num_cards_str2int = int(num_cards)
 
     if use_local is True:
         local_wordlist = os.environ.get('LOCAL_WORDLIST')
@@ -32,8 +33,8 @@ def invent(attempts, num_cards):
 
     text_model = markovify.Text(text)
 
-    for i in range(num_cards):
-        return text_model.make_sentence(tries=attempts)
+    for i in range(num_cards_str2int):
+        return text_model.make_sentence(tries=attempts_str2int)
 
 
 @app.route('/')
@@ -50,6 +51,8 @@ def form():
         return render_template('result.html', num_cards=num_cards, attempts=attempts)
 
     return render_template('form.html')
+
+app.jinja_env.globals.update(invent=invent)
 
 
 def main():

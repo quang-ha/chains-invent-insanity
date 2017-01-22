@@ -24,8 +24,9 @@
     <div class="container">
         <div id="content"></div>
         {% block content %}
-        <h1>Chains Invent Insanity</h1>
-        <p>{{ invent(attempts, num_cards) }}</p>
+        <div class="h1">Chains Invent Insanity</div>
+        <p class="h2">{{ invent(attempts, num_cards) }}</p>
+        {% endblock %}
     </div>
 </body>
 </html>

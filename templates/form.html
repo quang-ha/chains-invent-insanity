@@ -25,15 +25,17 @@
     <div class="container">
         <div id="content"></div>
         {% block content %}
-            <h1>Chains Invent Insanity</h1>
-            <form action="" method="POST" name="/result">
-                {{ form.hidden_tag() }}
-                <div class="form-group">
-                    <input type="text" name="num_cards">
-                <input type="text" name="attempts">
+        <div class="h1">Chains Invent Insanity</div><br />
+        <form action="" method="POST" name="/result">
+            <div class="form-group">
+                <div class="input-sm">
+                    Number of Cards to Generate: <input type="text" name="num_cards"><br />
+                    Number of attempts to generate valid cards each time: <input type="text" name="attempts"><br />
+                    <input class="btn btn-primary" type="submit" value="submit">
+                </div>
             </div>
-            <input class="btn btn-primary" type="submit" value="submit">
         </form>
+        {% endblock %}
     </div>
 </body>
 </html>
