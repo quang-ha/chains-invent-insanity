@@ -37,20 +37,16 @@ def invent(attempts, num_cards):
         return text_model.make_sentence(tries=attempts_str2int)
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
-
-
-@app.route("/form", methods=['GET', 'POST'])
-def form():
 
     if request.method == 'POST':
         num_cards = request.form['num_cards']
         attempts = request.form['attempts']
         return render_template('result.html', num_cards=num_cards, attempts=attempts)
 
-    return render_template('form.html')
+    return render_template('index.html')
+
 
 app.jinja_env.globals.update(invent=invent)
 

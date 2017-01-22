@@ -22,7 +22,47 @@
 </head>
 <body>
 {% block content %}
-    <h1>Chains Invent Insanity</h1>
+    <div class="container-fluid">
+        <div class="jumbotron">
+            <div class="h1">Welcome to Chains Invent Insanity</div><br />
+            <p class="text-left">
+                Chains Invent Insanity is a <a href="https://cardsagainsthumanity.com" target="_blank">
+                Cards Against Humanity</a> answer card generator.<br />
+                As the name suggests, it generates cards based on a Markov chain compiled from a wordlist.<br />
+                This wordlist is comprised of every single (official) answer card ever written for every edition of the game.
+
+            </p>
+        </div>
+        <form action="" method="POST" name="/result">
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <div class="input-group-sm">
+                            <label for="cards">Number of cards to generate:</label>
+                            <input class="form-control" id="cards" type="text" title="Number of cards" name="num_cards">
+                            <label for="attempts">Number of attempts to generate valid cards each time:</label>
+                            <input class="form-control" id="attempts" type="text" title="Number of attempts" name="attempts">
+                            <br />
+                            <input class="btn btn-primary" type="submit" value="Invent ALL THE INSANITY!!">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <h3>Instructions:</h3>
+                        <p class="text-left">
+                            Lorem ipsum set dolor sit amet blah blah something nonummy bork bork doggo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <br />
+        <p class="text-right">
+            This app is a <a href="https://boxingoctop.us" target="_blank">Boxing Octopus</a> project.<br />
+            Chains Invent Insanity was built using <a href="https://flask.pocoo.org" target="_blank">Flask</a><br />
+            For the source, check out the <a href="https://github.com/tuxotaku/chains-invent-insanity" target="_blank">
+            Github Repo</a>. <br />
+        </p>
+    </div>
 {% endblock %}
 </body>
 </html>

@@ -21,11 +21,23 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
+    <div class="container-fluid">
         <div id="content"></div>
         {% block content %}
-        <div class="h1">Chains Invent Insanity</div>
-        <p class="h2">{{ invent(attempts, num_cards) }}</p>
+        <div class="jumbotron">
+            <div class="h1">Welcome to Chains Invent Insanity</div><br />
+            <p class="text-left">
+                Chains Invent Insanity is a Cards Against Humanity answer card generator.<br />
+                As the name suggests, it generates cards based on a Markov chain compiled from a wordlist.<br />
+                This wordlist is comprised of every single answer card ever written for every edition of
+                <a href="https://cardsagainsthumanity.com" target="_blank">Cards Against Humanity.</a>
+            </p>
+        </div>
+        <div class="well well-lg">
+            {% for card in request.form['num_cards'] %}
+                {{ invent(attempts, num_cards) }}
+            {% endfor %}
+        </div>
         {% endblock %}
     </div>
 </body>
