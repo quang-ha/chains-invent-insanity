@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% block body %}
     <div class="well well-sm">
+        <div class="row">
+            {% for card in request.form['num_cards'] %}
+                <div class="col-sm-3"></div>
+            {% endfor %}
+        </div>
         <canvas id="card" width="230" height="320">
             {% for card in request.form['num_cards'] %}
                 <script language="JavaScript">
