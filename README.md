@@ -11,5 +11,5 @@ A Markov Chain-based Cards Against Humanity answer card generator.
 
 ### Setup via Docker:
 1. Build the docker image: ```docker build -t chainsinventinsanity .```
-2. Create and run the container: ```docker run -Pd chainsinventinsanity --name chainsinventinsanity```
+2. Create and run the container: ```docker run --name chainsinventinsanity -Pd chainsinventinsanity "gunicorn -b 0.0.0.0:8000 -w 1 web:app"```
 
