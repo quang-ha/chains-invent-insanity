@@ -1,91 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Chains Invent Insanity</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous">
+{% extends "base.html" %}
+{% block body %}
+    <div class="well well-sm">
+        <canvas id="card" width="230" height="320">
+            {% for card in request.form['num_cards'] %}
+                <script language="JavaScript">
+                    function wrapText(context, text, x, y, maxWidth, lineHeight) {
+                        var words = text.split(' ');
+                        var line = '';
 
-    <!-- Optional theme -->
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-          crossorigin="anonymous">
-
-    <!-- Latest JQuery from Google -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
-</head>
-<body>
-    <div class="container-fluid">
-        <div id="content"></div>
-        {% block content %}
-        <div class="jumbotron">
-            <div class="h1">Welcome to Chains Invent Insanity</div><br />
-            <p class="text-left">
-                Chains Invent Insanity is a Cards Against Humanity answer card generator.<br />
-                As the name suggests, it generates cards based on a Markov chain compiled from a wordlist.<br />
-                This wordlist is comprised of every single answer card ever written for every edition of
-                <a href="https://cardsagainsthumanity.com" target="_blank">Cards Against Humanity.</a>
-            </p>
-        </div>
-        <div class="well well-sm">
-            <canvas id="card" width="230" height="320">
-                {% for card in request.form['num_cards'] %}
-                    <script language="JavaScript">
-                        function wrapText(context, text, x, y, maxWidth, lineHeight) {
-                            var words = text.split(' ');
-                            var line = '';
-
-                            for(var n = 0; n < words.length; n++){
-                                var testLine = line + words[n] + ' ';
-                                var metrics = context.measureText(testLine);
-                                var testWidth = metrics.width;
-                                if (testWidth > maxWidth && n > 0) {
-                                    context.fillText(line, x, y);
-                                    line = words[n] + ' ';
-                                    y += lineHeight;
-                                }
-                                else {
-                                    line = testLine;
-                                }
+                        for(var n = 0; n < words.length; n++){
+                            var testLine = line + words[n] + ' ';
+                            var metrics = context.measureText(testLine);
+                            var testWidth = metrics.width;
+                            if (testWidth > maxWidth && n > 0) {
+                                context.fillText(line, x, y);
+                                line = words[n] + ' ';
+                                y += lineHeight;
                             }
-                            context.fillText(line, x, y);
+                            else {
+                                line = testLine;
+                            }
                         }
+                        context.fillText(line, x, y);
+                    }
 
-                        var canvas = document.getElementById("card");
+                    var canvas = document.getElementById("card");
 
-                        canvas.width = 230;
-                        canvas.height = 320;
+                    canvas.width = 230;
+                    canvas.height = 320;
 
-                        var background = new Image();
-                        background.src = "https://s3.amazonaws.com/chains-invent-insanity/CAH-blank-white.png";
+                    var background = new Image();
+                    background.src = "https://s3.amazonaws.com/chains-invent-insanity/CAH-blank-white.png";
 
-                        var context = canvas.getContext("2d");
+                    var context = canvas.getContext("2d");
 
-                        background.onload = function() {
-                            context.drawImage(background, 0, 0)
-                        };
+                    background.onload = function() {
+                        context.drawImage(background, 0, 0)
+                    };
 
-                        var maxWidth = 205;
-                        var lineHeight = 25;
-                        var x = (canvas.width - maxWidth) / 2;
-                        var y = 30;
-                        var text = "{{ invent(attempts, num_cards) }}";
-                        context.font = "bold 16px Helvetica";
-                        wrapText(context, text, x, y, maxWidth, lineHeight);
-                    </script>
-                {% endfor %}
-            </canvas>
-        </div>
-        {% endblock %}
+                    var maxWidth = 205;
+                    var lineHeight = 25;
+                    var x = (canvas.width - maxWidth) / 2;
+                    var y = 30;
+                    var text = "{{ invent(attempts, num_cards) }}";
+                    context.font = "bold 16px Helvetica";
+                    wrapText(context, text, x, y, maxWidth, lineHeight);
+                </script>
+            {% endfor %}
+        </canvas>
     </div>
-</body>
-</html>
+{% endblock %}

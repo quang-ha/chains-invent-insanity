@@ -1,68 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Chains Invent Insanity</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-          crossorigin="anonymous">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
-</head>
-<body>
-{% block content %}
-    <div class="container-fluid">
-        <div class="jumbotron">
-            <div class="h1">Welcome to Chains Invent Insanity</div><br />
-            <p class="text-left">
-                Chains Invent Insanity is a <a href="https://cardsagainsthumanity.com" target="_blank">
-                Cards Against Humanity</a> answer card generator.<br />
-                As the name suggests, it generates cards based on a Markov chain compiled from a wordlist.<br />
-                This wordlist is comprised of every single (official) answer card ever written for every edition of the game.
-
-            </p>
-        </div>
-        <form action="" method="POST" name="/result">
-            <div class="row">
-                <div class="col-sm-5">
-                    <div class="form-group">
-                        <div class="input-group-sm">
-                            <label for="cards">Number of cards to generate:</label>
-                            <input class="form-control" id="cards" type="text" title="Number of cards" name="num_cards">
-                            <label for="attempts">Number of attempts to generate valid cards each time:</label>
-                            <input class="form-control" id="attempts" type="text" title="Number of attempts" name="attempts">
-                            <br />
-                            <input class="btn btn-primary" type="submit" value="Invent ALL THE INSANITY!!">
-                        </div>
-                    </div>
-                    <div class="col-sm-5">
-                        <h3>Instructions:</h3>
-                        <p class="text-left">
-                            Lorem ipsum set dolor sit amet blah blah something nonummy bork bork doggo.
-                        </p>
+{% extends "base.html" %}
+{% block body %}
+    <form action="" method="POST" name="/result">
+        <div class="row" style="color: gray;">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <div class="input-group-sm">
+                        <h3>Options:</h3>
+                        <label for="cards">Number of cards to generate:</label>
+                        <input class="form-control" id="cards" type="text" title="Number of cards" name="num_cards">
+                        <label for="attempts">Number of attempts to generate valid cards each time:</label>
+                        <input class="form-control" id="attempts" type="text" title="Number of attempts" name="attempts">
+                        <br />
+                        <input class="btn btn-primary" type="submit" value="Invent ALL THE INSANITY!!">
                     </div>
                 </div>
             </div>
-        </form>
-        <br />
-        <p class="text-right">
-            This app is a <a href="https://boxingoctop.us" target="_blank">Boxing Octopus</a> project.<br />
-            Chains Invent Insanity was built using <a href="https://flask.pocoo.org" target="_blank">Flask</a><br />
-            For the source, check out the <a href="https://github.com/tuxotaku/chains-invent-insanity" target="_blank">
-            Github Repo</a>. <br />
-        </p>
-    </div>
+            <div class="col-sm-8">
+                <h3>Instructions/Notes:</h3>
+                <p class="text-left">
+                    The markov chain generator will try numerous times to assemble what is meant to pass for a
+                    logical sentence. However, generally speaking, this value SHOULD be above 1000 to avoid an error.
+                    Additionally, the eventual idea is that you will be able to generate a table of multiple cards,
+                    however this feature does not yet work.
+                </p>
+            </div>
+        </div>
+    </form>
 {% endblock %}
-</body>
-</html>

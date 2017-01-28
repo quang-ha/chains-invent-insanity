@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chains Invent Insanity</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+          crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container-fluid" style="background-color: black;">
+        <div class="jumbotron" style="background-color: lightgray;">
+            <div class="h1">Welcome to Chains Invent Insanity</div><br />
+            <p class="text-left">
+                Chains Invent Insanity is a <a href="https://cardsagainsthumanity.com" target="_blank">
+                Cards Against Humanity</a> answer card generator.<br />
+                As the name suggests, it generates cards based on a Markov chain compiled from a wordlist.<br />
+                This wordlist is comprised of every single (official) answer card ever written for every edition of the game.
+
+            </p>
+        </div>
+        {% block body %}{% endblock %}
+        <br />
+        <p class="text-right">
+            This app is a <a href="https://boxingoctop.us" target="_blank">Boxing Octopus</a> project.<br />
+            Chains Invent Insanity was built using <a href="https://flask.pocoo.org" target="_blank">Flask</a><br />
+            For the source, check out the <a href="https://github.com/tuxotaku/chains-invent-insanity" target="_blank">
+            Github Repo</a>. <br />
+        </p>
+    </div>
+</body>
+</html>
