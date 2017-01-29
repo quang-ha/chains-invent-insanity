@@ -18,6 +18,11 @@ app.secret_key = os.environ.get('APP_KEY')
 
 
 def invent(attempts, num_cards):
+    """
+    :param attempts: Number of attempts markovify should take to generate a valid sentence for each card.
+    :param num_cards: Number of cards to generate.
+    :return:
+    """
 
     use_local = os.environ.get('USE_LOCAL_WORDLIST')
     attempts_str2int = int(attempts)
