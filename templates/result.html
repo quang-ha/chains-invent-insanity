@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="row">
+    {% for card in request.form['num_cards'] %}
+    <div class="col-sm-3">
+        <div class="cards">
+            <div class="card">
+              <p>
+                {{ invent(attempts, num_cards) }}
+              </p>
+              <img class="cahlogo" src="https://s3.amazonaws.com/chains-invent-insanity/CAH-Card-logo.png">
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

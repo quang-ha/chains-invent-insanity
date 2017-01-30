@@ -1,3 +1,7 @@
-markovify==0.5.4
-pkg-resources==0.0.0
-Unidecode==0.4.19
+markovify>=0.5.4
+Unidecode>=0.4.19
+requests>=2.12.4
+flask>=0.12
+flask-wtf>=0.14
+python-dotenv>=0.6.2
+gunicorn>=19.6.0
