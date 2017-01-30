@@ -27,6 +27,7 @@ def invent(attempts, num_cards):
     use_local = os.environ.get('USE_LOCAL_WORDLIST')
     attempts_str2int = int(attempts)
     num_cards_str2int = int(num_cards)
+    cards = []
 
     if use_local is True:
         local_wordlist = os.environ.get('LOCAL_WORDLIST')
@@ -39,7 +40,9 @@ def invent(attempts, num_cards):
     text_model = markovify.Text(text)
 
     for i in range(num_cards_str2int):
-        return text_model.make_sentence(tries=attempts_str2int)
+        cards.append(text_model.make_sentence(tries=attempts_str2int))
+
+    return cards
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -48,7 +51,8 @@ def index():
     if request.method == 'POST':
         num_cards = request.form['num_cards']
         attempts = request.form['attempts']
-        return render_template('result.html', num_cards=num_cards, attempts=attempts)
+        cards = invent(attempts, num_cards)
+        return render_template('result.html', cards=cards)
 
     return render_template('index.html')
 
