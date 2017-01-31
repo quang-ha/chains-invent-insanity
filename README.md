@@ -10,7 +10,8 @@ A Markov Chain-based Cards Against Humanity answer card generator.
 4: Copy the ```env.example``` file to ```.env``` and fill out as needed. 
 5. Run the app via the bundled gunicorn WSGI server: ```gunicorn -D -b 0.0.0.0:8000 -w 1 web:app```
 
-### Setup via Docker:
-1. Build the docker image: ```docker build -t chainsinventinsanity .```
-2. Create and run the container: ```docker run --name chainsinventinsanity -Pd chainsinventinsanity "gunicorn -b 0.0.0.0:8000 -w 1 web:app"```
+### Setup via Docker Compose:
+1. Create .env file in ```./app``` directory based on the ```env.example``` file in the same directory.
+2. Build microservices: ```docker-compose build```
+3. Bring up cluster: ```docker-compose up```
 
