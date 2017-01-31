@@ -1,5 +1,5 @@
 # Chains Invent Insanity
-A Markov Chain-based Cards Against Humanity answer card generator.
+A Markov Chain-based [Cards Against Humanity](https://cardsagainsthumanity.com) answer card generator.
 
 ## Usage:
 
@@ -15,3 +15,4 @@ A Markov Chain-based Cards Against Humanity answer card generator.
 2. Build microservices: ```docker-compose build```
 3. Bring up cluster: ```docker-compose up```
 
+***NOTE:*** URIs in the .env file MUST NOT contain quotes, as these will be parsed literally as part of the URI.
