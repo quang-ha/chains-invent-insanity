@@ -4,6 +4,7 @@ A Markov Chain-based [Cards Against Humanity](https://cardsagainsthumanity.com) 
 ## Usage:
 
 ### Basic Standalone Setup:
+*All app files can be found within the ```./app``` directory.*
 1. Create a virtualenv: ```virtualenv chains-invent-insanity```
 2. Activate the new virtualenv: ```source $path_to_venv/bin/activate``` or with virtualenvwrapper: ```workon chains-invent-insanity```
 3. Install Requirements: ```pip install -r requirements.txt```
