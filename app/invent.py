@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from wtforms import Form, IntegerField, validators
 from os.path import join, dirname
 from dotenv import load_dotenv, find_dotenv
 import os
@@ -17,6 +18,13 @@ app.debug = os.environ.get('DEBUG_MODE')
 app.secret_key = os.environ.get('APP_KEY')
 
 
+class OptionForm(Form):
+    num_card_field = IntegerField('Number of cards to generate:',
+                                  [validators.NumberRange(min=1, max=2048)])
+    attempts_field = IntegerField('Number of attempts to generate valid cards each time:',
+                                  [validators.NumberRange(min=1000, max=1000000)])
+
+
 def invent(attempts, num_cards):
     """
     :param attempts: Number of attempts markovify should take to generate a valid sentence for each card.
@@ -25,6 +33,7 @@ def invent(attempts, num_cards):
     """
 
     use_local = os.environ.get('USE_LOCAL_WORDLIST')
+
     attempts_str2int = int(attempts)
     num_cards_str2int = int(num_cards)
     cards = []
@@ -48,7 +57,8 @@ def invent(attempts, num_cards):
 @app.route('/', methods=['GET', 'POST'])
 def index():
 
-    if request.method == 'POST':
+    form = OptionForm(request.form)
+    if request.method == 'POST' and not form.validate():
         num_cards = request.form['num_cards']
         attempts = request.form['attempts']
         cards = invent(attempts, num_cards)

@@ -1,17 +1,43 @@
 {% extends "base.html" %}
 {% block body %}
-    <form action="" method="POST" name="options">
+    <form method="POST" id="options" name="options"
+          data-fv-framework="bootstrap"
+          data-fv-icon-valid="glyphicon glyphicon-ok"
+          data-fv-icon-invalid="glyphicon glyphicon-remove"
+          data-fv-icon-validating="glyphicon glyphicon-refresh">
+
         <div class="row" style="color: whitesmoke;">
             <div class="col-sm-4">
                 <div class="form-group">
                     <div class="input-group-sm">
                         <h3 style="font-weight: bold;">Options:</h3>
                         <label for="cards">Number of cards to generate:</label>
-                        <input class="form-control" id="cards" type="number" title="Number of cards" name="num_cards"
-                               placeholder="1" value="1" max="2048" required>
+                        <input class="form-control"
+                               id="cards"
+                               type="number"
+                               title="Number of cards"
+                               name="num_cards"
+                               placeholder="1"
+                               min="1"
+                               value="1"
+                               max="2048"
+                               data-fv-integer="true"
+                               data-fv-integer-message="Please enter a valid number"
+                               required />
+
                         <label for="attempts">Number of attempts to generate valid cards each time:</label>
-                        <input class="form-control" id="attempts" type="number" title="Number of attempts" name="attempts"
-                               placeholder="10000" value="10000" max="100000" required>
+                        <input class="form-control"
+                               id="attempts"
+                               type="number"
+                               title="Number of attempts"
+                               name="attempts"
+                               placeholder="10000"
+                               value="10000"
+                               min="10000"
+                               max="1000000"
+                               data-fv-integer="true"
+                               data-fv-integer-message="Please enter a valid number"
+                               required />
                         <br />
                         <input class="btn btn-primary btn-sm" type="submit" value="Invent ALL THE INSANITY!!">
                         <input class="btn btn-primary btn-sm" type="reset" value="Reset to Defaults">
@@ -40,4 +66,9 @@
             </div>
         </div>
     </form>
+    <script>
+       $(document).ready(function() {
+           $('#options').formValidation();
+       });
+    </script>
 {% endblock %}
