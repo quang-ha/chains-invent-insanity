@@ -15,6 +15,6 @@ A Markov Chain-based [Cards Against Humanity](https://cardsagainsthumanity.com) 
 ### Setup via Docker Compose:
 1. Create .env file in ```./app``` directory based on the ```env.example``` file in the same directory.
 2. Build microservices: ```docker-compose build```
-3. Bring up cluster: ```docker-compose up```
+3. Bring up cluster: ```docker-compose up -d```
 
 ***NOTE:*** URIs in the .env file MUST NOT contain quotes, as these will be parsed literally as part of the URI.
