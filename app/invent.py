@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, flash, abort, render_template, request
 from wtforms import Form, IntegerField, validators
 from os.path import join, dirname
 from dotenv import load_dotenv, find_dotenv
@@ -59,8 +59,15 @@ def index():
 
     form = OptionForm(request.form)
     if request.method == 'POST' and not form.validate():
-        num_cards = request.form['num_cards']
-        attempts = request.form['attempts']
+        try:
+            num_cards = request.form['num_cards']
+        except ValueError:
+            abort(400)
+        try:
+            attempts = request.form['attempts']
+        except ValueError:
+            flash(u'Invalid Integer', 'error')
+
         cards = invent(attempts, num_cards)
         return render_template('result.html', cards=cards)
 
