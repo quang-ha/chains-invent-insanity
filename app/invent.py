@@ -62,7 +62,7 @@ def index():
         try:
             num_cards = request.form['num_cards']
         except ValueError:
-            abort(400)
+            flash(u'Invalid Integer', 'error')
         try:
             attempts = request.form['attempts']
         except ValueError:
