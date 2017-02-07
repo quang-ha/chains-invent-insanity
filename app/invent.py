@@ -30,6 +30,8 @@ if os.environ.get('USE_LOCAL_CARD_IMG') is True:
 else:
     card_img = os.environ.get('REMOTE_CARD_IMG')
 
+assets_dir = os.path.join(os.getcwd(), 'assets')
+
 
 class OptionForm(Form):
     num_card_field = IntegerField('Number of cards to generate:',
