@@ -1,4 +1,4 @@
-from flask import Flask, flash, abort, render_template, request
+from flask import Flask, flash, render_template, request, url_for
 from wtforms import Form, IntegerField, validators
 from os.path import join, dirname
 from dotenv import load_dotenv, find_dotenv
@@ -57,7 +57,19 @@ def invent(attempts, num_cards):
 @app.route('/', methods=['GET', 'POST'])
 def index():
 
+    cards = invent('10000', '1')
+
+    if request.method == 'POST':
+        return render_template('advanced.html')
+
+    return render_template('index.html', cards=cards)
+
+
+@app.route('/', methods=['GET', 'POST'])
+def advanced():
+
     form = OptionForm(request.form)
+
     if request.method == 'POST' and not form.validate():
         try:
             num_cards = request.form['num_cards']
@@ -71,7 +83,7 @@ def index():
         cards = invent(attempts, num_cards)
         return render_template('result.html', cards=cards)
 
-    return render_template('index.html')
+    return render_template('advanced.html')
 
 
 app.jinja_env.globals.update(invent=invent)

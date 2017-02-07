@@ -1,76 +1,71 @@
 {% extends "base.html" %}
 {% block body %}
-    <form method="POST" id="options" name="options"
-          data-fv-framework="bootstrap"
-          data-fv-icon-valid="glyphicon glyphicon-ok"
-          data-fv-icon-invalid="glyphicon glyphicon-remove"
-          data-fv-icon-validating="glyphicon glyphicon-refresh">
-
-        <div class="row" style="color: whitesmoke;">
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <div class="input-group-sm">
-                        <h3 style="font-weight: bold;">Options:</h3>
-                        <label for="cards">Number of cards to generate:</label>
-                        <input class="form-control"
-                               id="cards"
-                               type="number"
-                               title="Number of cards"
-                               name="num_cards"
-                               placeholder="1"
-                               min="1"
-                               value="1"
-                               max="2048"
-                               data-fv-integer="true"
-                               data-fv-integer-message="Please enter a valid number"
-                               data-fv-integer-decimalseparator="true"
-                               required />
-
-                        <label for="attempts">Number of attempts to generate valid cards each time:</label>
-                        <input class="form-control"
-                               id="attempts"
-                               type="number"
-                               title="Number of attempts"
-                               name="attempts"
-                               placeholder="10000"
-                               value="10000"
-                               min="10000"
-                               max="1000000"
-                               data-fv-integer="true"
-                               data-fv-integer-message="Please enter a valid number"
-                               data-fv-integer-decimalseparator="true"
-                               required />
-                        <br />
-                        <input class="btn btn-primary btn-sm" type="submit" value="Invent ALL THE INSANITY!!">
-                        <input class="btn btn-primary btn-sm" type="reset" value="Reset to Defaults">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <h3 style="font-weight: bold;">Why??</h3>
-                <p class="text-left">
-                    Because Cards Against Humanity is fun, and hilarious; but let's face it, play it enough times, and
-                    you get bored, because you've seen every answer. Also, Markov chains are absurd, and hilarious.
-                    So to my way of thinking, they're a perfect combination. That said, I have a strange sense of humour;
-                    so perhaps you won't find this as hilarious. Your loss if you don't, however I really do hope this
-                    provides you with some manner of amusing distraction from your otherwise dull and dreary life. ENJOY!
-                </p>
-                <h3 style="font-weight: bold;">Instructions/Notes:</h3>
-                <p class="text-left">
-                    The markov chain generator will try numerous times to assemble what is meant to pass for a
-                    logical sentence. However, generally speaking, this value SHOULD be above 1000 to avoid an error,
-                    and the default value of 10000 should be fine enough, however if you start seeing duplicate cards,
-                    you may want to increase this number.<br /><br />
-                    Additionally, you can pick the number of cards you'd like to generate.<br /><br />
-                    Once you've generated the cards, you can simply refresh the browser to get a new set of cards using
-                    the same parameters, or click the "Start Again" button to return to this page.
-                </p>
+<div class="row">
+    {% for card in cards %}
+    <div class="col-sm-3">
+        <div class="cards">
+            <div class="card">
+              <p>
+                {{ card }}
+              </p>
+              <img class="cahlogo" src="https://s3.amazonaws.com/chains-invent-insanity/CAH-Card-logo.png">
             </div>
         </div>
-    </form>
-    <script>
-       $(document).ready(function() {
-           $('#options').formValidation();
-       });
-    </script>
+    </div>
+    {% endfor %}
+    <div class="col-sm-8" style="color: whitesmoke;">
+        <h3 style="font-weight: bold;">WTF is a Markov Chain?</h3>
+        <p class="text-left">
+            Wikipedia has this to say on the subject of Markov Chains:<br /><br />
+            <cite>
+                "...a Markov process is a specific type of a mathematical object known as a stochastic or random process,
+                which is usually defined as a collection of random variables. Historically, the random variables were
+                associated with or indexed by some set of numbers, usually viewed as time, giving the interpretation of
+                a stochastic process representing numerical values of some random system evolving over time, such as an
+                electrical current fluctuating due to thermal noi..."
+            </cite><br /><br />
+            Um...no. Just. Just no. I dunno about you, but I kinda lost that at the first "stochastic" (whatever the hell
+            that means).<br /><br />
+            So what the <cite>HELL</cite> is a Markov Chain then? The tl;dr version is that a Markov Chain is a predictive
+            algorithm which attempts to figure out (using some fancypants statistical hoodoo) how to predict what should
+            come next in a sequence of data (be it words, numbers, emojis, animals, sasquatches....whatever),
+            based on an already established data set.<br /><br />
+            Still confused? *sigh* Alright fine. The SUPER tl;dr version is that Markov Chains are at the heart of what
+            makes your smartphone's autocomplete work (that is, if by "work", you actually MEANT to use the word "ducking"
+            all those times...)
+        </p>
+        <h3 style="font-weight: bold;">Why??</h3>
+        <p class="text-left">
+            Because Cards Against Humanity is fun, and hilarious; but let's face it, play it enough times, and
+            you get bored, because you've seen every answer. Also, Markov chains are absurd, and hilarious.
+            So to my way of thinking, they're a perfect combination. That said, I have a strange sense of humour;
+            so perhaps you won't find this as hilarious. Your loss if you don't, however I really do hope this
+            provides you with some manner of amusing distraction from your otherwise dull and dreary life. ENJOY!
+        </p>
+        <h3 style="font-weight: bold;">Instructions/Notes:</h3>
+        <p class="text-left">
+            The markov chain generator will try numerous times to assemble what is meant to pass for a
+            logical sentence. However, generally speaking, this value SHOULD be above 1000 to avoid an error,
+            and the default value of 10000 should be fine enough, however if you start seeing duplicate cards,
+            you may want to increase this number.<br /><br />
+            Additionally, you can pick the number of cards you'd like to generate.<br /><br />
+            Once you've generated the cards, you can simply refresh the browser to get a new set of cards using
+            the same parameters, or click the "Start Again" button to return to this page.
+        </p>
+    </div>
+</div>
+<form method="post" id="buttons" name="buttons">
+    <div class="row">
+        <div class="col-sm-3">
+            <input class="btn btn-primary btn-sm"
+                   type="submit"
+                   onsubmit="window.location.reload();"
+                   value="Get Another Card">
+            <input class="btn btn-primary btn-sm"
+                   type="submit"
+                   onsubmit="{{ url_for('advanced') }}"
+                   value="Advanced Mode">
+        </div>
+    </div>
+</form>
 {% endblock %}
