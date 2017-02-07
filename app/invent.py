@@ -1,4 +1,5 @@
-from flask import Flask, flash, abort, render_template, request
+from flask import Flask, flash, render_template, request
+from flask_analytics import Analytics
 from wtforms import Form, IntegerField, validators
 from os.path import join, dirname
 from dotenv import load_dotenv, find_dotenv
@@ -16,6 +17,12 @@ except IOError:
 app = Flask(__name__)
 app.debug = os.environ.get('DEBUG_MODE')
 app.secret_key = os.environ.get('APP_KEY')
+
+# Simple check for Google Analytics
+if os.environ.get('USE_ANALYTICS') is not None and not False:
+    Analytics(app)
+    app.config['ANALYTICS']['GOOGLE_CLASSIC_ANALYTICS']['ENABLED'] = True
+    app.config['ANALYTICS']['GOOGLE_CLASSIC_ANALYTICS']['ACCOUNT'] = os.environ.get('GOOGLE_ANALYTICS_ACCOUNT')
 
 
 class OptionForm(Form):
