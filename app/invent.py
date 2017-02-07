@@ -24,6 +24,12 @@ if os.environ.get('USE_ANALYTICS') is not None and not False:
     app.config['ANALYTICS']['GOOGLE_CLASSIC_ANALYTICS']['ENABLED'] = True
     app.config['ANALYTICS']['GOOGLE_CLASSIC_ANALYTICS']['ACCOUNT'] = os.environ.get('GOOGLE_ANALYTICS_ACCOUNT')
 
+# Are we storing the cardback image locally?
+if os.environ.get('USE_LOCAL_CARD_IMG') is True:
+    card_img = os.environ.get('LOCAL_CARD_IMG')
+else:
+    card_img = os.environ.get('REMOTE_CARD_IMG')
+
 
 class OptionForm(Form):
     num_card_field = IntegerField('Number of cards to generate:',
@@ -76,7 +82,8 @@ def index():
             flash(u'Invalid Integer', 'error')
 
         cards = invent(attempts, num_cards)
-        return render_template('result.html', cards=cards)
+
+        return render_template('result.html', card_bg=card_img, cards=cards)
 
     return render_template('index.html')
 
