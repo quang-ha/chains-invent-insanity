@@ -1,4 +1,4 @@
-from flask import Flask, flash, render_template, request
+from flask import Flask, flash, render_template, request, Markup
 from flask_analytics import Analytics
 from wtforms import Form, IntegerField, validators
 from os.path import join, dirname
@@ -6,6 +6,7 @@ from dotenv import load_dotenv, find_dotenv
 import os
 import markovify
 import requests
+import markdown
 
 # Tell our app where to get its environment variables from
 dotenv_path = join(dirname(__file__), '.env')
@@ -29,6 +30,8 @@ if os.environ.get('USE_LOCAL_CARD_IMG') is True:
     card_img = os.environ.get('LOCAL_CARD_IMG')
 else:
     card_img = os.environ.get('REMOTE_CARD_IMG')
+
+assets_dir = os.path.join(os.getcwd(), 'assets')
 
 
 class OptionForm(Form):
@@ -85,7 +88,9 @@ def index():
 
         return render_template('result.html', card_bg=card_img, cards=cards)
 
-    return render_template('index.html')
+    explainer = Markup(markdown.markdownFromFile('/home/ryan/Revisions/chains-invent-insanity/app/assets/explainer.md'))
+
+    return render_template('index.html', explainer=explainer)
 
 
 app.jinja_env.globals.update(invent=invent)

@@ -6,3 +6,4 @@ flask-wtf>=0.14
 python-dotenv>=0.6.2
 gunicorn>=19.6.0
 flask-analytics>=0.6.0
+markdown>=2.6.8
