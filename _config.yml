@@ -1,0 +1,8 @@
+title: Chains-invent-insanity
+description: "A Markov Chain-based Cards Against Humanity White (answer) card generator "
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-midnight
+
+gems:
+  - jekyll-mentions
