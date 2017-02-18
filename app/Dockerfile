@@ -5,4 +5,6 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ADD . /app
 WORKDIR /app
 EXPOSE 8000
+RUN mkdir /app/log
+RUN mkdir /app/conf
 RUN pip install -r requirements.txt --no-cache-dir --disable-pip-version-check

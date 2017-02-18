@@ -4,19 +4,31 @@ from wtforms import Form, IntegerField, validators
 from os.path import join, dirname
 from dotenv import load_dotenv, find_dotenv
 import os
+import sys
 import markovify
 import requests
+import logging
+
 
 # Tell our app where to get its environment variables from
-dotenv_path = join(dirname(__file__), '.env')
+dotenv_path = join(dirname(__file__), 'conf', '.env')
 try:
     load_dotenv(dotenv_path)
 except IOError:
     find_dotenv()
 
+# Set up some environment variables
+DEBUG = os.environ.get('DEBUG_MODE')
+ADDRESS = os.environ.get('ADDRESS')
+PORT = int(os.environ.get('PORT'))
+
 app = Flask(__name__)
-app.debug = os.environ.get('DEBUG_MODE')
+app.debug = DEBUG
 app.secret_key = os.environ.get('APP_KEY')
+
+# Set up logging
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.DEBUG)
 
 # Simple check for Google Analytics
 if os.environ.get('USE_ANALYTICS') is not None and not False:
@@ -94,7 +106,24 @@ app.jinja_env.globals.update(invent=invent)
 
 
 def main():
-    app.run()
+
+    if os.environ.get('ADDRESS') and os.environ.get('PORT'):
+        host = ADDRESS
+        port = PORT
+    elif not os.environ.get('ADDRESS'):
+        print "ADDRESS Environment Variable not set, defaulting to localhost."
+        host = '127.0.0.1'
+        port = PORT
+    elif not os.environ.get('PORT'):
+        print "PORT Environment Variable not set, defaulting to 5000."
+        host = ADDRESS
+        port = 5000
+    else:
+        print "ADDRESS and PORT Environment Variables not set, defaulting to localhost:5000."
+        host = '127.0.0.1'
+        port = 5000
+
+    app.run(host=host, port=port, debug=DEBUG)
 
 if __name__ == "__main__":
     main()
