@@ -19,13 +19,13 @@ app.debug = os.environ.get('DEBUG_MODE')
 app.secret_key = os.environ.get('APP_KEY')
 
 # Simple check for Google Analytics
-if os.environ.get('USE_ANALYTICS') is not None and not False:
+if os.environ.get('USE_ANALYTICS') is not None and not "False":
     Analytics(app)
     app.config['ANALYTICS']['GOOGLE_CLASSIC_ANALYTICS']['ENABLED'] = True
     app.config['ANALYTICS']['GOOGLE_CLASSIC_ANALYTICS']['ACCOUNT'] = os.environ.get('GOOGLE_ANALYTICS_ACCOUNT')
 
 # Are we storing the cardback image locally?
-if os.environ.get('USE_LOCAL_CARD_IMG') is True:
+if os.environ.get('USE_LOCAL_CARD_IMG') == "True":
     card_img = os.environ.get('LOCAL_CARD_IMG')
 else:
     card_img = os.environ.get('REMOTE_CARD_IMG')
@@ -46,14 +46,14 @@ def invent(attempts, num_cards):
     :param num_cards: Number of cards to generate.
     :return:
     """
-
+    
     use_local = os.environ.get('USE_LOCAL_WORDLIST')
 
     attempts_str2int = int(attempts)
     num_cards_str2int = int(num_cards)
     cards = []
 
-    if use_local is True:
+    if use_local == "True":
         local_wordlist = os.environ.get('LOCAL_WORDLIST')
         text = local_wordlist
     else:
